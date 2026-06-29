@@ -14,7 +14,7 @@ class ArtikelDetailScreen extends StatelessWidget {
     String konten = artikel['isi'] ?? 'Tidak ada konten.';
     String rawGambar = artikel['gambar_sampul']?.toString() ?? '';
     String imgUrl = rawGambar.isEmpty ? '' : (rawGambar.startsWith('http') ? rawGambar : (rawGambar.startsWith('/storage/') ? 'https://trashreport.web.id$rawGambar' : (rawGambar.startsWith('storage/') ? 'https://trashreport.web.id/$rawGambar' : (rawGambar.startsWith('/') ? 'https://trashreport.web.id/storage$rawGambar' : 'https://trashreport.web.id/storage/$rawGambar'))));
-    String date = artikel['diterbitkan_pada'] != null ? DateFormat('dd MMM yyyy').format(DateTime.parse(artikel['diterbitkan_pada'])) : 'Baru';
+    String date = artikel['diterbitkan_pada'] != null ? DateFormat('dd MMM yyyy').format(DateTime.parse(artikel['diterbitkan_pada']).toLocal()) : 'Baru';
 
     final Color textPrimary = const Color(0xFF0F172A);
     final Color textSecondary = const Color(0xFF64748B);
@@ -82,14 +82,29 @@ class ArtikelDetailScreen extends StatelessWidget {
                   padding: HtmlPaddings.zero,
                   margin: Margins.zero,
                 ),
+                "h1": Style(
+                  fontSize: FontSize(24.0),
+                  fontWeight: FontWeight.bold,
+                  color: textPrimary,
+                ),
                 "h2": Style(
                   fontSize: FontSize(20.0),
                   fontWeight: FontWeight.bold,
                   color: textPrimary,
                 ),
+                "h3": Style(
+                  fontSize: FontSize(18.0),
+                  fontWeight: FontWeight.bold,
+                  color: textPrimary,
+                ),
                 "p": Style(
                   margin: Margins.only(bottom: 12.0),
-                )
+                  textAlign: TextAlign.justify, // Default rata kanan kiri
+                ),
+                ".ql-align-center": Style(textAlign: TextAlign.center),
+                ".ql-align-right": Style(textAlign: TextAlign.right),
+                ".ql-align-justify": Style(textAlign: TextAlign.justify),
+                ".ql-align-left": Style(textAlign: TextAlign.left),
               },
             ),
             
